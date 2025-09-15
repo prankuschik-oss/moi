@@ -24,7 +24,7 @@ func (r *Repository) GetUsersByID(id int) (user models.User, err error) {
 	return user, nil
 }
 
-func (r *Repository) CreateUser(users models.User) (err error) {
+func (r *Repository) CreateUsers(users models.User) (err error) {
 	_, err = r.db.Exec(`INSERT INTO users (name, email, age)
 					VALUES ($1, $2, $3,)`,
 		users.Name,
