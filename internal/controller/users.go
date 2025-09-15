@@ -7,8 +7,8 @@ import (
 	"strconv"
 )
 
-func (ctrl *Controller) GetAllProducts(c *gin.Context) {
-	products, err := ctrl.service.GetAllProducts()
+func (ctrl *Controller) GetAllUsers(c *gin.Context) {
+	users, err := ctrl.service.GetAllUsers()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -16,10 +16,10 @@ func (ctrl *Controller) GetAllProducts(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, products)
+	c.JSON(http.StatusOK, users)
 }
 
-func (ctrl *Controller) GetProductByID(c *gin.Context) {
+func (ctrl *Controller) GetUsersByID(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -29,7 +29,7 @@ func (ctrl *Controller) GetProductByID(c *gin.Context) {
 		return
 	}
 
-	product, err := ctrl.service.GetProductByID(id)
+	users, err := ctrl.service.GetUsersByID(id)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -37,19 +37,19 @@ func (ctrl *Controller) GetProductByID(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, users)
 }
 
-func (ctrl *Controller) CreateProduct(c *gin.Context) {
-	var product models.Product
-	if err := c.ShouldBindJSON(&product); err != nil {
+func (ctrl *Controller) CreateUsers(c *gin.Context) {
+	var users models.User
+	if err := c.ShouldBindJSON(&users); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
 		return
 	}
 
-	if err := ctrl.service.CreateProduct(product); err != nil {
+	if err := ctrl.service.CreateUsers(users); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -57,11 +57,11 @@ func (ctrl *Controller) CreateProduct(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{
-		"message": "Product created successfully",
+		"message": "Users created successfully",
 	})
 }
 
-func (ctrl *Controller) UpdateProductByID(c *gin.Context) {
+func (ctrl *Controller) UpdateUsersByID(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -71,17 +71,17 @@ func (ctrl *Controller) UpdateProductByID(c *gin.Context) {
 		return
 	}
 
-	var product models.Product
-	if err = c.ShouldBindJSON(&product); err != nil {
+	var users models.User
+	if err = c.ShouldBindJSON(&users); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
 		return
 	}
 
-	product.ID = id
+	users.ID = id
 
-	if err = ctrl.service.UpdateProductByID(product); err != nil {
+	if err = ctrl.service.UpdateUsersByID(users); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -89,11 +89,11 @@ func (ctrl *Controller) UpdateProductByID(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Product updated successfully",
+		"message": "Users updated successfully",
 	})
 }
 
-func (ctrl *Controller) DeleteProductByID(c *gin.Context) {
+func (ctrl *Controller) DeleteUsersByID(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -103,7 +103,7 @@ func (ctrl *Controller) DeleteProductByID(c *gin.Context) {
 		return
 	}
 
-	if err = ctrl.service.DeleteProductByID(id); err != nil {
+	if err = ctrl.service.DeleteUsersByID(id); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
@@ -111,6 +111,6 @@ func (ctrl *Controller) DeleteProductByID(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Product deleted successfully",
+		"message": "Users deleted successfully",
 	})
 }

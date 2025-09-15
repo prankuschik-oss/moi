@@ -1,16 +1,19 @@
 package controller
 
-import "net/http"
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 func (ctrl *Controller) RegisterEndpoints() {
 
 	ctrl.router.GET("/ping", ctrl.Ping)
 
-	ctrl.router.GET("/products", ctrl.GetAllProducts)
-	ctrl.router.GET("/products/:id", ctrl.GetProductByID)
-	ctrl.router.POST("/products", ctrl.CreateProduct)
-	ctrl.router.PUT("/products/:id", ctrl.UpdateProductByID)
-	ctrl.router.DELETE("/products/:id", ctrl.DeleteProductByID)
+	ctrl.router.GET("/users", ctrl.GetAllUsers)
+	ctrl.router.GET("/users/:id", ctrl.GetUsersByID)
+	ctrl.router.POST("/users", ctrl.CreateUsers)
+	ctrl.router.PUT("/users/:id", ctrl.UpdateUsersByID)
+	ctrl.router.DELETE("/users/:id", ctrl.DeleteUsersByID)
 }
 
 func (ctrl *Controller) Ping(c *gin.Context) {

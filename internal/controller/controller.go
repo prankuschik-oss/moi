@@ -1,5 +1,10 @@
 package controller
 
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/nicitapa/firstProgect/internal/service"
+)
+
 type Controller struct {
 	router  *gin.Engine
 	service *service.Service

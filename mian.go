@@ -5,12 +5,13 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/nicitapa/firstProgect/internal/controller"
 	"github.com/nicitapa/firstProgect/internal/repository"
+	"github.com/nicitapa/firstProgect/internal/service"
 	"log"
 )
 
 func main() {
 	// Шаг 1. Подключение бд
-	dsn := "host=localhost port=5432 user=postgres password=postgres dbname=online_shop_db sslmode=disable"
+	dsn := "host=localhost port=5432 user=postgres password=nicita130 dbname=onlineshop sslmode=disable"
 	db, err := sqlx.Open("postgres", dsn)
 	if err != nil {
 		log.Fatal(err)

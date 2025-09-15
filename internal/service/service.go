@@ -1,4 +1,4 @@
-package sevice
+package service
 
 import "github.com/nicitapa/firstProgect/internal/repository"
 
