@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/nicitapa/firstProgect/internal/models"
 	"net/http"
 	"strconv"

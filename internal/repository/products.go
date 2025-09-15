@@ -4,7 +4,7 @@ import "github.com/nicitapa/firstProgect/internal/models"
 
 func (r *Repository) GetAllProducts() (products []models.Product, err error) {
 	if err = r.db.Select(&products, `
-		SELECT id, product_name, manufacturer, product_count, price 
+		SELECT id, name, email, age, 
 		FROM products
 		ORDER BY id`); err != nil {
 		return nil, err
@@ -15,7 +15,7 @@ func (r *Repository) GetAllProducts() (products []models.Product, err error) {
 
 func (r *Repository) GetProductByID(id int) (product models.Product, err error) {
 	if err = r.db.Get(&product, `
-		SELECT id, product_name, manufacturer, product_count, price 
+		SELECT id, name, email, age, 
 		FROM products
 		WHERE id = $1`, id); err != nil {
 		return models.Product{}, err
@@ -25,12 +25,11 @@ func (r *Repository) GetProductByID(id int) (product models.Product, err error) 
 }
 
 func (r *Repository) CreateProduct(product models.Product) (err error) {
-	_, err = r.db.Exec(`INSERT INTO products (product_name, manufacturer, price, product_count)
-					VALUES ($1, $2, $3, $4)`,
-		product.ProductName,
-		product.Manufacturer,
-		product.Price,
-		product.ProductCount)
+	_, err = r.db.Exec(`INSERT INTO products (name, email, age)
+					VALUES ($1, $2, $3,)`,
+		product.name,
+		product.email,
+		product.age)
 	if err != nil {
 		return err
 	}
@@ -40,15 +39,13 @@ func (r *Repository) CreateProduct(product models.Product) (err error) {
 
 func (r *Repository) UpdateProductByID(product models.Product) (err error) {
 	_, err = r.db.Exec(`
-		UPDATE products SET product_name = $1, 
-		                    manufacturer = $2, 
-		                    price = $3,
-		                    product_count = $4
-		                WHERE id = $5`,
-		product.ProductName,
-		product.Manufacturer,
-		product.Price,
-		product.ProductCount,
+		UPDATE products SET name = $1, 
+		                    email = $2, 
+		                    age = $3,
+		                    		                WHERE id = $5`,
+		product.name,
+		product.email,
+		product.age,
 		product.ID)
 	if err != nil {
 		return err
