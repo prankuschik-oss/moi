@@ -1,44 +1,47 @@
 package repository
 
-import "github.com/nicitapa/firstProgect/internal/models"
+import (
+	"context"
+	"github.com/nicitapa/firstProgect/internal/models"
+)
 
-func (r *Repository) GetAllUsers() (users []models.User, err error) {
-	if err = r.db.Select(&users, `
+func (r *Repository) GetAllUsers(ctx context.Context) (users []models.User, err error) {
+	if err = r.db.SelectContext(ctx, &users, `
 		SELECT id, name, email, age, 
 		FROM users
 		ORDER BY id`); err != nil {
-		return nil, err
+		return nil, r.translateError(err)
 	}
 
 	return users, nil
 }
 
-func (r *Repository) GetUsersByID(id int) (user models.User, err error) {
-	if err = r.db.Get(&user, `
+func (r *Repository) GetUsersByID(ctx context.Context, id int) (user models.User, err error) {
+	if err = r.db.GetContext(ctx, &user, `
 		SELECT id, name, email, age
 		FROM users
 		WHERE id = $1`, id); err != nil {
-		return models.User{}, err
+		return models.User{}, r.translateError(err)
 	}
 
 	return user, nil
 }
 
-func (r *Repository) CreateUsers(users models.User) (err error) {
-	_, err = r.db.Exec(`INSERT INTO users (name, email, age)
+func (r *Repository) CreateUsers(ctx context.Context, users models.User) (err error) {
+	_, err = r.db.ExecContext(ctx, `INSERT INTO users (name, email, age)
 					VALUES ($1, $2, $3,)`,
 		users.Name,
 		users.Email,
 		users.Age)
 	if err != nil {
-		return err
+		return r.translateError(err)
 	}
 
 	return nil
 }
 
-func (r *Repository) UpdateUsersByID(users models.User) (err error) {
-	_, err = r.db.Exec(`
+func (r *Repository) UpdateUsersByID(ctx context.Context, users models.User) (err error) {
+	_, err = r.db.ExecContext(ctx, `
 		UPDATE users SET name = $1, 
 		                    email = $2, 
 		                    age = $3,
@@ -48,16 +51,16 @@ func (r *Repository) UpdateUsersByID(users models.User) (err error) {
 		users.Age,
 		users.ID)
 	if err != nil {
-		return err
+		return r.translateError(err)
 	}
 
 	return nil
 }
 
-func (r *Repository) DeleteUsersByID(id int) (err error) {
-	_, err = r.db.Exec(`DELETE FROM users WHERE id = $1`, id)
+func (r *Repository) DeleteUsersByID(ctx context.Context, id int) (err error) {
+	_, err = r.db.ExecContext(ctx, `DELETE FROM users WHERE id = $1`, id)
 	if err != nil {
-		return err
+		return r.translateError(err)
 	}
 
 	return nil

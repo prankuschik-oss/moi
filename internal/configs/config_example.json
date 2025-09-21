@@ -1,0 +1,16 @@
+{
+  "app_params": {
+    "gin_mode": "",
+    "port_run": "",
+    "server_url": "",
+    "server_namr": "OnlineShop"
+  },
+  "posgres_params":{
+    "host": "",
+    "port": "",
+    "user": "",
+    "password": "",
+    "database": ""
+  }
+
+}
