@@ -5,6 +5,7 @@ go 1.24.6
 require (
 	github.com/gin-gonic/gin v1.10.1
 	github.com/goccy/go-json v0.10.2
+	github.com/golang/mock v1.6.0
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.9

@@ -3,9 +3,9 @@ package contracts
 import "github.com/nicitapa/firstProgect/internal/models"
 
 type RepositoryI interface {
-	GetAllUsers() (users []models.User, err error)
-	GetUsersByID(id int) (user models.User, err error)
-	CreateUsers(users models.User) (err error)
-	UpdateUsersByID(users models.User) (err error)
-	DeleteUsersByID(id int) (err error)
+	GetAllEmployees() (employees []models.Employees, err error)
+	GetEmployeesByID(id int) (employees models.Employees, err error)
+	CreateEmployees(employees models.Employees) (err error)
+	UpdateEmployeesByID(employees models.Employees) (err error)
+	DeleteEmployeesByID(id int) (err error)
 }

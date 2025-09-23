@@ -4,9 +4,9 @@ import "errors"
 
 var (
 	ErrNotfound           = errors.New("not found")
-	ErrUsersNotfound      = errors.New("users not found")
-	ErrInvalidUsersID     = errors.New("invalid users id")
+	ErrEmployeesNotfound      = errors.New("employees not found")
+	ErrInvalidEmployeesID     = errors.New("invalid employees id")
 	ErrInvalidRequestBody = errors.New("invalid request body")
 	ErrInvalidFieldValue  = errors.New("invalid field value")
-	ErrInvalidUserstName  = errors.New("invalid users name, min 4 symbols")
+	ErrInvalidEmployeesName  = errors.New("invalid eployees name, min 4 symbols")
 )
