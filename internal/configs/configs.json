@@ -1,15 +1,15 @@
 {
   "app_params": {
     "gin_mode": "debug",
-    "port_run": "7779",
+    "port_run": "7777",
     "server_url": "localhos",
     "server_namr": "OnlineShop"
   },
-  "posgres_params":{
-  "host": "localhost",
-   "port": "5432",
+  "postgres_params": {
+    "host": "localhost",
+    "port": "5432",
     "user": "postgres",
-    "database": "onlineshop"
+    "database": "onlineshop_db"
 },
   "redis_params": {
     "host": "localhost",
